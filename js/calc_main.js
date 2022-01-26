@@ -130,7 +130,7 @@ $(document).ready(function(){
 				
 				$("#totalCost, #print_totalCost").text("Total Cost Price is : $ " + numberWithCommas(totalCost) );
 				$("#clientPrice, #print_clientPrice").text("$ " + numberWithCommas(clientPrice));
-				$("#serial_num").text("S # 0125" + round_zero_decimal_digits(profit) + "00");
+				$("#serial_num").text("Document # 0125" + round_zero_decimal_digits(profit) + "00");
 				
 				let currentDate = new Date().toLocaleString();
 				
