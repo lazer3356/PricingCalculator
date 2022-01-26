@@ -9,10 +9,12 @@ $(document).ready(function(){
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
 			
+			var Alphabet_Array = ["A","B","C","D","E","F","G"];
+			let newfield = '';
 			var priceFieldHtml = '<div class="row input_field">' + 
 					'<div class="col-md-6">' + 
 						'<label>' + 
-							'Description' + 
+							'Group B' + 
 						'</label>' + 
 						'<div class="input_field_n_dollar">' + 
 							'<input type="text" id="" class="number_req form-control description" name ="" value=""/>' + 
@@ -29,6 +31,31 @@ $(document).ready(function(){
 					'</div>' + 
 					'<div class="col-md-1"> <label>&nbsp;</label> <button type="button" class="minus"> - </button></div>' + 
 				'</div>';
+				
+				function priceField(num1){
+					
+					return '<div class="row input_field">' + 
+					'<div class="col-md-6">' + 
+						'<label>' + 
+							'Group ' + Alphabet_Array[num1] + 
+						'</label>' + 
+						'<div class="input_field_n_dollar">' + 
+							'<input type="text" id="" class="number_req form-control description" name ="" value=""/>' + 
+						'</div>' + 
+					'</div>' + 
+					'<div class="col-md-5">' + 
+						'<label>' + 
+							'Price' + 
+						'</label>' + 
+						'<div class="input_field_n_dollar">' + 
+							'<span class="dollar_sign"> $ </span>' + 
+							'<input type="text" id="" class="number_req form-control list_price" name ="" value=""/>' + 
+						'</div>' + 	
+					'</div>' + 
+					'<div class="col-md-1"> <label>&nbsp;</label> <button type="button" class="minus"> - </button></div>' + 
+				'</div>';
+					
+				}
 			
 			$("#priceCalcForm").validate({
 			  rules: {
@@ -46,10 +73,13 @@ $(document).ready(function(){
 			  }
 			});
 			
+			var num1 = 0;
 			
 			jQuery( ".plus" ).click(function( event ){
 				event.preventDefault();
-				 $(this).parent().parent().parent().append(priceFieldHtml);
+				num1 = num1 + 1;
+				newfield = priceField(num1);
+				 $(this).parent().parent().parent().append(newfield);
 				//console.log( $(this).parent().parent().parent().append(priceFieldHtml) );
 			});
 			/*
@@ -63,6 +93,7 @@ $(document).ready(function(){
 			*/
 			jQuery("#priceCalcForm").on("click",".minus", function(){
 				jQuery(this).parent().parent().remove();
+				num1 = num1 - 1;
 			});
 				
 			jQuery( "#price_calc_btn" ).click(function( event ){
@@ -107,7 +138,7 @@ $(document).ready(function(){
 					clientPrice += round_2_digits( price + (price * upCharge) - (price * discount) );
 					
 					print_input_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
-					print_input_data += '<td> List price $ ' + numberWithCommas( Number( $(this).val() ) ) + ' </td></tr>';
+					print_input_data += '<td> List Price $ ' + numberWithCommas( Number( $(this).val() ) ) + ' </td></tr>';
 					
 					print_ind_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
 					print_ind_data += '<td> $ ' + numberWithCommas( Number(price) ) + ' </td></tr>';
