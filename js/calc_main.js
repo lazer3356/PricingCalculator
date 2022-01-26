@@ -96,7 +96,7 @@ $(document).ready(function(){
 				let shipping =  $('#shipping').val() ? Number( $('#shipping').val() ) : 0;
 				let surcharge =  $('#surcharge').val() ? Number( $('#surcharge').val() ) : 0;
 				
-				let print_input_data = '<table id="input_data_table"> <tr> <th class="thead-dark"> Description</th> <th class="thead-dark"> Price</th></tr>';
+				let print_input_data = '<table id="input_data_table"> <tr> <th class="thead-dark"> Description</th> <th class="thead-dark"> </th></tr>';
 				
 				let print_ind_data = '';
 				
@@ -107,7 +107,7 @@ $(document).ready(function(){
 					clientPrice += round_2_digits( price + (price * upCharge) - (price * discount) );
 					
 					print_input_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
-					print_input_data += '<td> $ ' + numberWithCommas( Number( $(this).val() ) ) + ' </td></tr>';
+					print_input_data += '<td> List price $ ' + numberWithCommas( Number( $(this).val() ) ) + ' </td></tr>';
 					
 					print_ind_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
 					print_ind_data += '<td> $ ' + numberWithCommas( Number(price) ) + ' </td></tr>';
@@ -152,15 +152,25 @@ $(document).ready(function(){
 					scrollTop: $("#resultsTable").offset().top
 				}, 1000);
 				
-				let print_total_data = '<table id="input_data_table"> <tr> <td id="totalCost" colspan="2" class="text-center">Total Cost Price is : $' + numberWithCommas(totalCost) +  '</td></tr>';
-				print_total_data += print_ind_data;
+				let print_retail_price = '<table id="input_data_table"> <tr> <td id="totalCost" colspan="2" class="text-center">Retail Price is : $' + numberWithCommas(clientPrice) +  '</td></tr>';
+				print_retail_price += print_ind_data;
 				
-				print_total_data +=	'</table><br/>'+
-									'<h2>Input Data</h2>'+
-									'<br/>';
+				print_retail_price +=	'</table><br/>';
+									
 				
 				
-				$('#editor').append(print_total_data);
+				$('#editor').append(print_retail_price);
+				
+				
+				let print_total_price = '<table id="input_data_table"> <tr> <td id="totalCost" colspan="2" class="text-center">Total Cost Price is : $' + 
+											numberWithCommas(totalCost) +  
+											'</td></tr></table><br/>' + 
+											'<h2>Input Data</h2>'+
+											'<br/>';
+				
+				$('#editor').append(print_total_price);
+				
+				
 				$('#editor').append(print_input_data);
 				
 			});	
