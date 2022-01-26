@@ -158,7 +158,7 @@ $(document).ready(function(){
 				print_input_data += '<tr><td> Surcharge </td>';
 				print_input_data += '<td> $ ' + numberWithCommas(surcharge) + ' </td></tr>';
 				
-				print_input_data += '<tr><td> Discount </td>';
+				print_input_data += '<tr><td> Price Group </td>';
 				print_input_data += '<td>' + discount * 100 + ' % </td></tr>';
 				
 				
