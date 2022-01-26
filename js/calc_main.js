@@ -98,15 +98,25 @@ $(document).ready(function(){
 				
 				let print_input_data = '<table id="input_data_table"> <tr> <th class="thead-dark"> Description</th> <th class="thead-dark"> Price</th></tr>';
 				
+				let print_ind_data = '';
+				
+				
 				$('.list_price').each(function () {
 					price = round_2_digits ( Number( $(this).val() ) * Number(vendor) );
 					totalCost += round_2_digits(price);
 					clientPrice += round_2_digits( price + (price * upCharge) - (price * discount) );
 					
 					print_input_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
-					print_input_data += '<td> $ ' + numberWithCommas(price) + ' </td></tr>';
+					print_input_data += '<td> $ ' + numberWithCommas( Number( $(this).val() ) ) + ' </td></tr>';
+					
+					print_ind_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
+					print_ind_data += '<td> $ ' + numberWithCommas( Number(price) ) + ' </td></tr>';
+					
+					
 					//console.log($(this).parent().parent().parent().find('.description').val());
 				});
+				
+				
 				
 				print_input_data += '<tr><td> Vendor </td>';
 				print_input_data += '<td>' + $('#main_unit option:selected').text() + ' </td></tr>';
@@ -128,7 +138,7 @@ $(document).ready(function(){
 				
 				let profit = round_2_digits(clientPrice - totalCost);
 				
-				$("#totalCost, #print_totalCost").text("Total Cost Price is : $" + numberWithCommas(totalCost) );
+				$("#totalCost").text("Total Cost Price is : $" + numberWithCommas(totalCost) );
 				$("#clientPrice, #print_clientPrice").text("$ " + numberWithCommas(clientPrice));
 				$("#serial_num").text("Document # 0125" + round_zero_decimal_digits(profit) + "00");
 				
@@ -142,6 +152,15 @@ $(document).ready(function(){
 					scrollTop: $("#resultsTable").offset().top
 				}, 1000);
 				
+				let print_total_data = '<table id="input_data_table"> <tr> <td id="totalCost" colspan="2" class="text-center">Total Cost Price is : $' + numberWithCommas(totalCost) +  '</td></tr>';
+				print_total_data += print_ind_data;
+				
+				print_total_data +=	'</table><br/>'+
+									'<h2>Input Data</h2>'+
+									'<br/>';
+				
+				
+				$('#editor').append(print_total_data);
 				$('#editor').append(print_input_data);
 				
 			});	
