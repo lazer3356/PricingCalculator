@@ -128,7 +128,7 @@ $(document).ready(function(){
 				
 				let profit = round_2_digits(clientPrice - totalCost);
 				
-				$("#totalCost, #print_totalCost").text("Total Cost Price is : $ " + numberWithCommas(totalCost) );
+				$("#totalCost, #print_totalCost").text("Total Cost Price is : $" + numberWithCommas(totalCost) );
 				$("#clientPrice, #print_clientPrice").text("$ " + numberWithCommas(clientPrice));
 				$("#serial_num").text("Document # 0125" + round_zero_decimal_digits(profit) + "00");
 				
