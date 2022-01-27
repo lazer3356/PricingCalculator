@@ -215,7 +215,7 @@ $(document).ready(function(){
 
 				print_input_data += '<tr>' + 
 										'<td> Vendor : ' + $('#main_unit option:selected').text() + ' </td>' + 
-										'<td> Client Level : ' + $('#discount option:selected').text() + ' </td>' + 
+										'<td> Client Scale : ' + $('#discount option:selected').text() + ' </td>' + 
 									'</tr>';
 									
 				print_input_data += '<tr>' + 
