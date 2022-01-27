@@ -9,7 +9,7 @@ $(document).ready(function(){
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
 			
-			var Alphabet_Array = ["A","B","C","D","E","F","G"];
+			var Alphabet_Array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 			let newfield = '';
 			var priceFieldHtml = '<div class="row input_field">' + 
 					'<div class="col-md-6">' + 
@@ -77,20 +77,13 @@ $(document).ready(function(){
 			
 			jQuery( ".plus" ).click(function( event ){
 				event.preventDefault();
-				num1 = num1 + 1;
-				newfield = priceField(num1);
-				 $(this).parent().parent().parent().append(newfield);
-				//console.log( $(this).parent().parent().parent().append(priceFieldHtml) );
+				if (num1 <= 25){
+					num1 = num1 + 1;
+					newfield = priceField(num1);
+					$(this).parent().parent().parent().append(newfield);
+				}
 			});
-			/*
-			jQuery( ".minus" ).click(function( event ){
-				event.preventDefault();
-				console.log("test");
-				console.log($(this).parent().parent().attr("class"));
-				$(this).parent().parent().remove();
-				
-			});
-			*/
+
 			jQuery("#priceCalcForm").on("click",".minus", function(){
 				jQuery(this).parent().parent().remove();
 				num1 = num1 - 1;
@@ -100,7 +93,7 @@ $(document).ready(function(){
 
 				event.preventDefault();
 				
-				jQuery("#input_data_table_1, #input_data_table_2, #input_data_table_3").remove();
+				jQuery("#input_data_table_1, #input_data_table_2, #input_data_table_3, .table_print_1").remove();
 				
 				var validator = $( "#priceCalcForm" ).validate();
 					if( ! validator.form() ){
@@ -122,6 +115,8 @@ $(document).ready(function(){
 				let vendor = Number( $('#main_unit').val() );
 				let upCharge = Number( $('#main_unit option:selected').attr('data-upcharge') )/100;
 				
+				let vendorSurcharge = $('#main_unit option:selected').attr('data-upcharge') ? Number( $('#main_unit option:selected').attr('data-surcharge') )/100 : 0;
+				
 				let discount =  $('#discount').val() ? Number( $('#discount').val() )/100 : 0;
 				
 				let shipping =  $('#shipping').val() ? Number( $('#shipping').val() ) : 0;
@@ -133,7 +128,12 @@ $(document).ready(function(){
 				
 				
 				$('.list_price').each(function () {
-					price = round_2_digits ( Number( $(this).val() ) * Number(vendor) );
+					
+					price = Number( $(this).val() );
+					price = price + ( Number( $(this).val() ) * Number(vendorSurcharge) );
+					//price = round_2_digits ( Number( $(this).val() ) * Number(vendor)  );
+					price = round_2_digits( price * Number(vendor) ) ;
+					
 					totalCost += round_2_digits(price);
 					clientPrice += round_2_digits( price + (price * upCharge) - (price * discount) );
 					
@@ -143,20 +143,18 @@ $(document).ready(function(){
 					print_ind_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
 					print_ind_data += '<td> $ ' + numberWithCommas( Number(price) ) + ' </td></tr>';
 					
-					
-					//console.log($(this).parent().parent().parent().find('.description').val());
 				});
 				
 				
-				
+
 				print_input_data += '<tr><td> Vendor </td>';
 				print_input_data += '<td>' + $('#main_unit option:selected').text() + ' </td></tr>';
 				
-				print_input_data += '<tr><td> Shipping </td>';
-				print_input_data += '<td> $ ' + numberWithCommas(shipping) + ' </td></tr>';
+				print_input_data += '<tr><td> Other Charges </td>';
+				print_input_data += '<td>' + vendorSurcharge * 100 + ' % </td></tr>';
 				
-				print_input_data += '<tr><td> Surcharge </td>';
-				print_input_data += '<td> $ ' + numberWithCommas(surcharge) + ' </td></tr>';
+				print_input_data += '<tr><td> Shipping </td>';
+				print_input_data += '<td> $ ' + numberWithCommas(shipping) + ' </td></tr>';				
 				
 				print_input_data += '<tr><td> Discount </td>';
 				print_input_data += '<td>' + discount * 100 + ' % </td></tr>';
@@ -164,18 +162,17 @@ $(document).ready(function(){
 				
 				print_input_data += '</table>';
 				
-				totalCost = totalCost + Number(shipping) + Number(surcharge);
-				clientPrice = clientPrice + Number(shipping) + Number(surcharge);
+				totalCost = totalCost + Number(shipping); // + Number(surcharge);
+				clientPrice = clientPrice + Number(shipping); // + Number(surcharge);
 				
 				let profit = round_2_digits(clientPrice - totalCost);
 				
 				$("#totalCost").text("Total Cost Price is : $" + numberWithCommas(totalCost) );
-				$("#clientPrice, #print_clientPrice").text("$ " + numberWithCommas(clientPrice));
-				$("#serial_num").text("Document # 0125" + round_zero_decimal_digits(profit) + "00");
+				$("#clientPrice").text("$ " + numberWithCommas(clientPrice));
 				
 				let currentDate = new Date().toLocaleString();
 				
-				$("#date").text(currentDate);	
+				//$("#date").text(currentDate);	
 				
 				$("#resultsTable").show();
 				
@@ -186,18 +183,36 @@ $(document).ready(function(){
 				let print_retail_price = '<table id="input_data_table_1"> <tr> <td id="totalCost" colspan="2" class="text-center">Retail Price is : $' + numberWithCommas(clientPrice) +  '</td></tr>';
 				print_retail_price += print_ind_data;
 				
-				print_retail_price +=	'</table><br/>';
+				print_retail_price +=	'</table>';
+				
+				
+				let print_header = '<table class="img_td table_print_1">' +
+										'<tr class="img_td">' +
+											'<td><img src="images/logo.png" alt="logo" id="logo_print" class=""/> </td>' +
+											'<td class="text-right"><br/> <span id="date">' + 
+											currentDate +
+											'</span> <br/> <span id="serial_num">' + 
+											'Document # 0125' + round_zero_decimal_digits(profit) + '00' + ' </span></td>' +
+										'</tr>' +
+									'</table>' +
+									'<div class="table_print_1">' +
+										'<br/>' +
+										'<h2>Result</h2>' +
+										'<br/>' +
+									'</div>';
 									
 				
+				$('#editor').append(print_header);
 				
 				$('#editor').append(print_retail_price);
 				
 				
 				let print_total_price = '<table id="input_data_table_2"> <tr> <td id="totalCost" colspan="2" class="text-center">Total Cost Price is : $' + 
 											numberWithCommas(totalCost) +  
-											'</td></tr></table><br/>' + 
+											'</td></tr></table>'+
+											'<div class="table_print_1"><br/>' + 
 											'<h2>Input Data</h2>'+
-											'<br/>';
+											'<br/></div>';
 				
 				$('#editor').append(print_total_price);
 				
