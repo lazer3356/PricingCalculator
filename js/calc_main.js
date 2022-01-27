@@ -151,7 +151,7 @@ $(document).ready(function(){
 				print_input_data += '<td>' + $('#main_unit option:selected').text() + ' </td></tr>';
 				
 				print_input_data += '<tr><td> Other Charges </td>';
-				print_input_data += '<td>' + vendorSurcharge * 100 + ' % </td></tr>';
+				print_input_data += '<td>' + round_zero_decimal_digits( vendorSurcharge ) * 100 + ' % </td></tr>';
 				
 				print_input_data += '<tr><td> Shipping </td>';
 				print_input_data += '<td> $ ' + numberWithCommas(shipping) + ' </td></tr>';				
