@@ -208,6 +208,9 @@ select, #cmd{
 .btn.btn-primary:hover{
 	background:#eb2227;
 }
+#price_calc_btn{
+	width:100%;
+}
 #cmd{
 	background:#eb2227;
 }
