@@ -258,3 +258,6 @@ select, #cmd{
 	background:#231f20;
 	border-right:1px solid #ececec;
 }
+.modification{
+	display:none;
+}
