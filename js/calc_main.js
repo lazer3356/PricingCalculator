@@ -88,7 +88,6 @@ $(document).ready(function(){
 				var eventTypeName = $("#main_unit option:selected");
 
 				if (eventTypeName.is('[name="CNG"]') ) {
-					//$('#band_type_choices option[name="acoustic"]').text('Wedding Ceremony');
 					jQuery('.modification').show();
 				}else{
 					jQuery('.modification').hide();
@@ -153,7 +152,13 @@ $(document).ready(function(){
 				let shipping =  jQuery('#shipping').val() ? Number( $('#shipping').val() ) : 0;
 				let surcharge =  jQuery('#surcharge').val() ? Number( $('#surcharge').val() ) : 0;
 				
-				let shipping_part =  Number( shipping ) / jQuery('.list_price').length ;
+				let shipping_part =   Number( shipping ); // Number( shipping ) / jQuery('.list_price').length ;
+				
+				if( jQuery('.list_price').length > 1){
+					shipping_part =  Number( shipping ) / 2;
+				}
+				
+				
 				
 				
 				let print_project_info = '<table id="input_data_table_2" class="table_print_pdf"> ' + 
@@ -175,6 +180,7 @@ $(document).ready(function(){
 				
 				let print_cost_table_sub = '';
 				
+				
 				let cnt1 = 0;
 				let modificationtotalPrice = 0;
 				
@@ -186,28 +192,25 @@ $(document).ready(function(){
 					price = Number( $(this).val() );
 					listprice = listprice + price;
 					price = price + ( Number( $(this).val() ) * Number(vendorSurcharge) );
-					//price = round_2_digits ( Number( $(this).val() ) * Number(vendor)  );
 					price = round_2_digits( ( price * Number(vendor) ) ) ;
 					
 					totalCost += round_2_digits(price);
-					clientPrice += round_2_digits( price + (price * upCharge) - (price * discount) );
-					
-					//print_input_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
-					//print_input_data += '<td> List Price $ ' + numberWithCommas( Number( $(this).val() ) ) + ' </td></tr>';
+					clientPrice += round_2_digits( price + (price * upCharge)  - (( price + (price * upCharge) ) * discount) );
 					
 					print_ind_data += '<tr><td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>';
-					//print_ind_data += '<td>' + numberWithCommas( Number( clientPrice ) ) + ' </td>';
 					print_ind_data += '<td> $ ' + numberWithCommas( Number(price) ) + ' </td></tr>';
 					
 					
 					print_cost_table_sub +=  '<tr>' + 
 												'<td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>' +
-												'<td>' + numberWithCommas( round_2_digits( price + (price * upCharge) - (price * discount) + shipping_part + modificationprice ) ) + ' </td>' +
+												'<td>' + numberWithCommas( round_2_digits( price + (price * upCharge) - (( price + (price * upCharge)) * discount) + shipping_part + modificationprice ) ) + ' </td>' +
 												'<td>' + numberWithCommas( Number( $(this).val() ) ) + ' </td>' +
 												'<td>' + numberWithCommas( round_2_digits(price + shipping_part + modificationprice) ) + ' </td>' +
 											'</tr>';
 					
-					cnt1++;					
+					cnt1++;
+
+					shipping_part = cnt1 > 1 ? 0 : 	shipping_part;
 					
 				});
 				
@@ -244,7 +247,6 @@ $(document).ready(function(){
 				
 				let profit = round_2_digits(clientPrice - totalCost);
 				
-				//$("#totalCost").text("Total Cost Price is : $" + numberWithCommas(totalCost) );
 				$("#clientPrice").text("$ " + numberWithCommas(clientPrice));
 				
 				let currentDate = new Date().toLocaleString();
