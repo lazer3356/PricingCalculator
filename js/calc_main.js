@@ -203,9 +203,9 @@ $(document).ready(function(){
 					
 					print_cost_table_sub +=  '<tr>' + 
 												'<td>' + $(this).parent().parent().parent().find('.description').val() + ' </td>' +
-												'<td> $ ' + numberWithCommas( round_2_digits( price + (price * upCharge) - (( price + (price * upCharge)) * discount) + shipping_part + modificationprice ) ) + ' </td>' +
-												'<td> $ ' + numberWithCommas( Number( $(this).val() ) ) + ' </td>' +
-												'<td> $ ' + numberWithCommas( round_2_digits(price + shipping_part + modificationprice) ) + ' </td>' +
+												'<td> $' + numberWithCommas( round_2_digits( price + (price * upCharge) - (( price + (price * upCharge)) * discount) + shipping_part + modificationprice ) ) + ' </td>' +
+												'<td> $' + numberWithCommas( Number( $(this).val() ) ) + ' </td>' +
+												'<td> $' + numberWithCommas( round_2_digits(price + shipping_part + modificationprice) ) + ' </td>' +
 											'</tr>';
 					
 					cnt1++;
@@ -222,8 +222,8 @@ $(document).ready(function(){
 									'</tr>';
 									
 				print_input_data += '<tr>' + 
-										'<td> Surcharges : ' + round_2_digits ( Number ( vendorSurcharge ) * 100 ) + ' % </td>' + 
-										'<td> Shipping : $ ' + numberWithCommas(shipping) + ' </td>' + 
+										'<td> Surcharges : ' + round_2_digits ( Number ( vendorSurcharge ) * 100 ) + '% </td>' + 
+										'<td> Shipping : $' + numberWithCommas(shipping) + ' </td>' + 
 									'</tr>';				
 				
 				print_input_data += '</table><div class="br_line"><br/></div>';
@@ -234,8 +234,8 @@ $(document).ready(function(){
 				
 				print_cost_table += '<tr>' + 
 										'<td class="text-bold"> Total </td>' +
-										'<td class="text-bold"> $ ' + numberWithCommas( round_2_digits( clientPrice ) ) + ' </td>' +
-										'<td class="text-bold"> $ ' + numberWithCommas( round_2_digits( listprice ) ) + ' </td>' +
+										'<td class="text-bold"> $' + numberWithCommas( round_2_digits( clientPrice ) ) + ' </td>' +
+										'<td class="text-bold"> $' + numberWithCommas( round_2_digits( listprice ) ) + ' </td>' +
 										'<td class="text-bold"> $' +  numberWithCommas( round_2_digits(totalCost) ) + ' </td>' +
 									'</tr>';
 									
