@@ -218,7 +218,7 @@ select, #cmd{
 	background:#eeeeef;
 	color:#000;
 }
-.plus,.minus {
+.btn_plus,.btn_minus,.plus,.minus {
     border: 0;
     background: #231f20;
     color: #fff;
@@ -232,13 +232,13 @@ select, #cmd{
     cursor: pointer;
 	width: 40px;
 }
-.plus:hover{
+.plus:hover,.btn_plus:hover{
 	background: #eb2227;
 }
-.minus{
+.minus,.btn_minus{
     background: #eb2227;
 }
-.minus:hover{
+.minus:hover,.btn_minus:hover{
 	background: #231f20;
 }
 #resultsTable {
@@ -260,4 +260,40 @@ select, #cmd{
 }
 .modification{
 	display:none;
+}
+
+
+.flex_subdiv{
+	display:flex;
+	justify-content:center;
+}
+
+
+
+.btn-secondary {
+    color: #fff;
+    background-color: #b23cfd;
+}
+
+.btn-check {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+.btn_l_c{
+	background: #231f20;
+	color:#fff;
+	border:0;
+	border-radius:0;
+	min-width:40px;
+	cursor:pointer;
+}
+.btn_l_c.active{
+	background: #eb2227 !important;
 }
