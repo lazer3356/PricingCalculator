@@ -7,6 +7,11 @@
 	<link href="css/print.min.css" rel="stylesheet">
     <!-- Main CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<style>
+		.flex_subdiv .error {
+			position: absolute;
+			bottom: 0;
+		}
 	</style>
 
 </head>
@@ -29,7 +34,7 @@
 				<div class="row input_field">
 					<div class="col-md-6">
 						<label>
-							Name
+							Deal Owner
 						</label>
 						<div class="">
 							<input type="text" id="main_name" class="number_req form-control main_name" name ="main_name" value=""/>
@@ -54,15 +59,24 @@
 						<select id="main_unit" name ="main_unit" required="required">
 							<option name="" value="">Please Select Vendor</option>
 							<!--<option name="" value="0.22" data-upcharge="100" data-surcharge=""> Adornus </option>-->
-							<option name="Bernier" value="0.5" data-upcharge="100" data-surcharge=""> Bernier Cabinet </option>
-							<option name="CNC" value="0.25" data-upcharge="100" data-surcharge="10" > CNC Cabinetry </option>
-							<option name="CNG" value="0.35" data-upcharge="100" data-surcharge=""> CNG Cabinets </option>
-							<option name="cubitac" value="0.28" data-upcharge="100" data-surcharge="7.0"> Cubitac Cabinet </option>
-							<option name="DC" value="0.371" data-upcharge="100" data-surcharge="10"> DC Cabinetry </option>
-							<option name="Executive" value="0.407" data-upcharge="100" data-surcharge="10"> Executive Cabinets </option>
-							<option name="Fabuwood" value="0.349" data-upcharge="100" data-surcharge="7.0"> Fabuwood </option>
-							<option name="Golden" value="0.40" data-upcharge="100" data-surcharge=""> Golden Home </option>														
-							<option name="HansKrug" value="1.0" data-upcharge="100" data-surcharge=""> Hans Krug </option>
+							<option name="Bernier" value="0.5" data-upcharge="210" data-surcharge="1"> Bernier Cabinet </option>
+							<option name="CNC" value="0.25" data-upcharge="215" data-surcharge="1.10" > CNC Cabinetry </option>
+							<option name="CNG" value="0.35" data-upcharge="215" data-surcharge="1"> CNG Cabinets </option>
+							<option name="cubitac" value="0.28" data-upcharge="215" data-surcharge="1"> Cubitac Cabinet </option>
+							<option name="DC" value="0.416" data-upcharge="210" data-surcharge="1.127"> DC Cabinetry </option>
+							<option name="Executive" value="0.44232" data-upcharge="210" data-surcharge="1.127"> Executive Cabinets </option>
+							<option name="Fabuwood" value="0.349" data-upcharge="215" data-surcharge="1.07"> Fabuwood </option>
+							<option name="Golden" value="0.40" data-upcharge="215" data-surcharge="1"> Golden Home </option>														
+							<option name="HansKrug" value="1.0" data-upcharge="210" data-surcharge="1"> Hans Krug </option>
+							
+							<option name="TeddWood_lm_ll" value="0.45885" data-upcharge="210" data-surcharge="1.101"> TeddWood  (LM & LL) </option>
+							<option name="TeddWood_custom" value="0.38095" data-upcharge="210" data-surcharge="1.101"> TeddWood  (Custom) </option>
+							<option name="Adornus" value="0.22" data-upcharge="215" data-surcharge="1"> Adornus </option>
+								
+	
+	
+	
+
 						</select>
 					</div>
 				</div>
@@ -77,9 +91,49 @@
 								<input type="text" id="description_1" class="number_req form-control description" name ="description_1" value="Cabinets"/>
 							</div>	
 						</div>
+						
+						<div class="col-md-3">
+							
+							<label>
+								&nbsp;
+							</label>
+							<div class="flex_subdiv">
+								<label class="btn btn-secondary btn_l_c" for="option1" >
+									<input type="radio" class="btn-check list_price_option" name="list_price_options" autocomplete="off" value="L" required="required"/>
+									L
+								</label>
+								<label class="btn btn-secondary btn_l_c disabled active" for="option0" onclick="">
+									<input type="radio" class="btn-check list_price_option neutral" name="list_price_options0" autocomplete="off" value="0" disabled="disabled" checked="checked"/>
+								</label>
+							   <label class="btn btn-secondary btn_l_c " for="option2">
+									<input type="radio" class="btn-check list_price_option" name="list_price_options" autocomplete="off" value="C" required="required" />
+									C
+								</label>
+
+							
+							</div>
+							
+							<!--
+							
+								<div class="switch-toggle switch-3 switch-candy">
+								  <input id="on" name="state-d" type="radio" value="L" checked="" />
+								  <label for="on" onclick="">L</label>
+
+								  <input id="na" name="state-d" type="radio" disabled checked="checked" />
+								  <label for="na" class="disabled" onclick="">&nbsp;</label>
+
+								  <input id="off" name="state-d" type="radio" value="C" />
+								  <label for="off" onclick="">C</label>
+
+								  <a></a>
+								</div>
+							-->
+						</div>
+						
+						
 						<div class="col-md-3">
 							<label>
-								List Price<span class="red"> * </span>
+								Price<span class="red"> * </span>
 							</label>
 							<div class="input_field_n_dollar">
 								<span class="dollar_sign"> $ </span>
@@ -98,6 +152,76 @@
 						<div class="col-md-1"><label>&nbsp;</label><button type="button" class="plus"> + </button></div>
 					</div>
 				</div>
+				
+				
+				<div id="speciality_items">
+					<div class="row input_field speciality_item_fields">
+						<div class="col-md-5">
+							<label>
+								Speciality Items ( Cost)
+							</label>
+							<div class="input_field_n_dollar">
+								<input type="text" id="speciality_item_1" class="number_req form-control speciality_item" name ="speciality_item_1" value="Cabinets"/>
+							</div>	
+						</div>
+						<div class="col-md-3">
+							<label>
+								Price<span class="red"> * </span>
+							</label>
+							<div class="input_field_n_dollar">
+								<span class="dollar_sign"> $ </span>
+								<input type="text" id="speciality_item_1" class="number_req form-control speciality_item_price" name ="speciality_item_price_1" value=""/>
+							</div>	
+						</div>
+						<div class="col-md-1"><label>&nbsp;</label><button type="button" class="btn_plus speciality_item_plus"> + </button></div>
+					</div>
+				</div>
+				
+				<div id="acessories">
+					<div class="row input_field acessories_dropdown_fields">
+						<div class="col-md-2">
+							<label>
+								Acessories
+							</label>
+							<div class="input_field_n_dollar">
+								<input type="number" id="acessories_qty_1" class="number_req form-control acessories_qty" name ="acessories_qty_1" value="1"/>
+							</div>	
+						</div>
+						<div class="col-md-9">
+							<label>
+								<span class="red"> &nbsp; </span>
+							</label>
+							<select id="acessories_dropdown" name ="acessories_dropdown" class="acessories_dropdown_list">
+								<option name="" value="">Please Select Acessory</option>
+								<!--<option name="" value="0.22" data-upcharge="100" data-surcharge=""> Adornus </option>-->
+								<option name="" value="171.70" data-list-price="401.64" data-cost-price="" data-retail_percent="15" data-model="502.56.842"> Trash Pullout - double 52 qt (champagne) </option>
+								<option name="" value="174.44" data-list-price="408.05" data-cost-price="" data-retail_percent="15" data-model="502.56.942" > Trash Pullout - double 52 qt (grey) </option>
+								<option name="" value="189.36" data-list-price="442.94" data-cost-price="" data-retail_percent="15" data-model="502.56.242"> Trash Pullout - double 52 qt (white) </option>
+								<option name="" value="148.00" data-list-price="346.20" data-cost-price="" data-retail_percent="15" data-model="502.56.840"> Trash Pullout - double 36 qt (champagne) </option>
+								<option name="" value="148.00" data-list-price="346.20" data-cost-price="" data-retail_percent="15" data-model="502.56.940"> Trash Pullout - double 36 qt (grey) </option>
+								<option name="" value="153.24" data-list-price="358.46" data-cost-price="" data-retail_percent="15" data-model="502.56.240"> Trash Pullout - double 36 qt (white) </option>
+								<option name="" value="92.48" data-list-price="216.34" data-cost-price="" data-retail_percent="25" data-model="556.99.117"> Spice Tray Insert (23.5" - birch) </option>
+								<option name="" value="75.22" data-list-price="175.94" data-cost-price="" data-retail_percent="25" data-model="556.99.114"> Spice Tray Insert (15.25" - birch) </option>														
+								<option name="" value="78.09" data-list-price="182.66" data-cost-price="" data-retail_percent="20" data-model="556.99.107" > Cutlery Divider Insert (23.5" - birch) </option>
+								
+								<option name="" value="64.20" data-list-price="150.17" data-cost-price="" data-retail_percent="20" data-model="556.99.104"> Cutlery Divider Insert (15.25" - birch) </option>
+								
+								<option name="" value="126.92" data-list-price="296.90" data-cost-price="" data-retail_percent="15" data-model="545.48.239"> Undersink Wire Pullout</option>
+								
+								<option name="" value="190.92" data-list-price="318.19" data-cost-price="" data-retail_percent="10" data-model="515.02.140"> Undersink Removable Sliding Baskets</option>
+								
+								<option name="" value="86.52" data-list-price="141.78" data-cost-price="" data-retail_percent="25" data-model="54410C1"> Undersink Cleaning Caddy</option>
+								
+								<option name="" value="223.92" data-list-price="523.78" data-cost-price="" data-retail_percent="20" data-model="502.72.705"> Hamper - 2 x 35 qt (Hailo 600mm) </option>
+								
+								<option name="" value="216.92" data-list-price="507.42" data-cost-price="" data-retail_percent="20" data-model="502.72.722"> Hamper - 2 x 35 qt (Hailo 450mm) </option>
+								
+							</select>	
+						</div>
+						<div class="col-md-1"><label>&nbsp;</label><button type="button" class="btn_plus acessories_plus"> + </button></div>
+					</div>
+				</div>
+				
 				
 				
 				
